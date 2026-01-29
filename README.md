@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kurly Brains Web
 
-## Getting Started
+A modern creative agency website built with Next.js 16, React 19, and Framer Motion.
 
-First, run the development server:
+## 🚀 Getting Started
+
+### Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## 🌐 Deploying to Render
 
-To learn more about Next.js, take a look at the following resources:
+### Option 1: Blueprint (Recommended)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Push your code to GitHub
+2. Go to [Render Dashboard](https://dashboard.render.com)
+3. Click **New** → **Blueprint**
+4. Connect your GitHub repository
+5. Render will auto-detect `render.yaml` and configure everything
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Option 2: Manual Setup
 
-## Deploy on Vercel
+1. Go to [Render Dashboard](https://dashboard.render.com)
+2. Click **New** → **Web Service**
+3. Connect your GitHub repo: `SakshamKandel/kurly-Brains-`
+4. Configure:
+   - **Runtime:** Node
+   - **Build Command:** `npm install && npm run build`
+   - **Start Command:** `npm run start`
+   - **Plan:** Free
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Environment Variables (if needed)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable | Value |
+|----------|-------|
+| NODE_ENV | production |
+| PORT | 3000 |
+
+## 📦 Tech Stack
+
+- **Framework:** Next.js 16
+- **UI:** React 19
+- **Animations:** Framer Motion
+- **Language:** TypeScript
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                 # App router pages
+│   ├── about/
+│   ├── contact/
+│   ├── privacy/
+│   ├── services/
+│   ├── terms/
+│   └── work/
+├── components/
+│   ├── sections/        # Homepage sections
+│   ├── Navbar.tsx
+│   └── Footer.tsx
+└── public/              # Static assets
+    ├── clients/         # Client logos
+    └── logos/           # Company logos
+```
+
+## 🎨 Services
+
+- Web Design & Development
+- AI Model Training
+- UI/UX Design
+- Amazon A+ Content
+- Graphic Design
+- Brand Identity
+- **Sports Graphic Design** ⚽🏀
+
+---
+
+Built with ❤️ by Kurly Brains

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useRef } from "react";
 
 interface AnimatedTextProps {
@@ -13,15 +13,15 @@ interface AnimatedTextProps {
 export function AnimatedText({ text, className = "", delay = 0 }: AnimatedTextProps) {
     const words = text.split(" ");
 
-    const container = {
+    const container: Variants = {
         hidden: { opacity: 0 },
-        visible: (i = 1) => ({
+        visible: {
             opacity: 1,
             transition: { staggerChildren: 0.03, delayChildren: delay },
-        }),
+        },
     };
 
-    const child = {
+    const child: Variants = {
         visible: {
             opacity: 1,
             y: 0,
