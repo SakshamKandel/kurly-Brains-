@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Anton, Inter } from "next/font/google";
+import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 
-const anton = Anton({
-  weight: "400",
-  variable: "--font-anton",
+const oswald = Oswald({
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-oswald",
   subsets: ["latin"],
   display: "swap",
 });
@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${anton.variable} ${inter.variable}`}>{children}</body>
+      <body className={`${oswald.variable} ${inter.variable}`}>{children}</body>
     </html>
   );
 }
