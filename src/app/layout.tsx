@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${oswald.variable} ${inter.variable}`}>{children}</body>
+      <body className={`${oswald.className} ${oswald.variable} ${inter.variable}`}>{children}</body>
     </html>
   );
 }
