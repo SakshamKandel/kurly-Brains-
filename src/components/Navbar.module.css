@@ -1,0 +1,134 @@
+.navbar {
+    position: absolute;
+    /* No sticky/fixed header to ensure pure editorial feel */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 2rem 0;
+    background: transparent;
+}
+
+.navContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 101;
+    /* Above mobile menu */
+}
+
+.logoText {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.navLinks {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+}
+
+.navLink {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-primary);
+    transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
+.navLink:hover,
+.navLink.active {
+    color: var(--text-primary);
+}
+
+/* Mobile */
+.menuToggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-primary);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.mobileContent {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.closeButton {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 4rem;
+}
+
+.mobileLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.mobileLink {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+    }
+
+    .menuToggle {
+        display: block;
+    }
+}

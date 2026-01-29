@@ -1,0 +1,232 @@
+.header {
+    min-height: 50vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 8rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.bgElements {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.floatingOrb {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.label {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--accent-primary);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 12vw, 9rem);
+    line-height: 0.9;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    line-height: 1.8;
+    position: relative;
+    z-index: 2;
+}
+
+/* Contact Section */
+.contactSection {
+    padding: 4rem 0 8rem;
+}
+
+.contactGrid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 6rem;
+}
+
+/* Form */
+.formWrapper {
+    background-color: var(--bg-secondary);
+    padding: 3rem;
+}
+
+.formTitle {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formLabel {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+    background-color: var(--bg-tertiary);
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+    color: var(--text-muted);
+}
+
+.formSelect {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23555' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+}
+
+.formTextarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.formButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.25rem 2.5rem;
+    background-color: var(--accent-primary);
+    color: var(--bg-primary);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.formButton:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-3px);
+}
+
+/* Info */
+.infoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.infoBlock {
+    padding-bottom: 2rem;
+}
+
+.infoTitle {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+}
+
+.infoLink {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.infoLink:hover {
+    color: var(--accent-primary);
+}
+
+.infoText {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.socialLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.socialLink {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.socialLink:hover {
+    color: var(--accent-primary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .contactGrid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+
+    .formWrapper {
+        padding: 2rem;
+    }
+}
