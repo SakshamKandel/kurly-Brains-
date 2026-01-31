@@ -206,7 +206,13 @@ export async function POST(req: Request) {
             }
         }
 
-        return NextResponse.json(data);
+        // Only return sanitized response - hide sensitive API metadata
+        return NextResponse.json({
+            message: {
+                role: 'assistant',
+                content: aiContent
+            }
+        });
     } catch (error) {
         console.error('API Error:', error);
         return NextResponse.json(

@@ -56,7 +56,7 @@ export default function AIChat() {
             if (!response.ok) throw new Error('Network response was not ok');
 
             const data = await response.json();
-            const aiContent = data.choices?.[0]?.message?.content || "Connection Interrupted.";
+            const aiContent = data.message?.content || "Connection Interrupted.";
 
             setMessages(prev => [...prev, {
                 role: 'assistant',
