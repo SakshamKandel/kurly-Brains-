@@ -1,93 +1,79 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import styles from "./Navbar.module.css";
 
 const navLinks = [
     { href: "/work", label: "Work" },
-    { href: "/services", label: "Services" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const pathname = usePathname();
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className={styles.navbar}>
-            <div className={`container ${styles.navContent}`}>
-                <Link href="/" className={styles.logo}>
+        <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 md:py-8 bg-transparent">
+            <div className="flex justify-between items-center w-full">
+                {/* Logo - Image */}
+                <Link href="/" className="z-50 relative w-10 h-10 md:w-12 md:h-12">
                     <Image
                         src="/logos/White Logo Without Text.png"
-                        alt="Kurly Brains"
-                        width={44}
-                        height={44}
-                        className={styles.logoImage}
+                        alt="KurlyBrains Logo"
+                        fill
+                        className="object-contain"
                     />
                 </Link>
 
-                {/* Desktop Navigation */}
-                <ul className={styles.navLinks}>
+                {/* Desktop Nav - Simple Text */}
+                <div className="hidden md:flex gap-12">
                     {navLinks.map((link) => (
-                        <li key={link.href}>
-                            <Link
-                                href={link.href}
-                                className={`${styles.navLink} ${pathname === link.href ? styles.active : ""}`}
-                            >
-                                {link.label}
-                            </Link>
-                        </li>
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="relative group font-inter text-sm font-medium uppercase tracking-widest text-white transition-colors"
+                        >
+                            {link.label}
+                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
+                        </Link>
                     ))}
-                </ul>
+                </div>
 
                 {/* Mobile Toggle */}
                 <button
-                    className={styles.menuToggle}
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="md:hidden text-white z-50"
+                    onClick={() => setIsOpen(!isOpen)}
                 >
-                    Menu
+                    {isOpen ? <X /> : <Menu />}
                 </button>
-
-                {/* Fullscreen Mobile Menu */}
-                <AnimatePresence>
-                    {isMenuOpen && (
-                        <motion.div
-                            className={styles.mobileMenu}
-                            initial={{ y: "-100%" }}
-                            animate={{ y: 0 }}
-                            exit={{ y: "-100%" }}
-                            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        >
-                            <div className={styles.mobileContent}>
-                                <button
-                                    className={styles.closeButton}
-                                    onClick={() => setIsMenuOpen(false)}
-                                >
-                                    Close
-                                </button>
-
-                                <div className={styles.mobileLinks}>
-                                    {navLinks.map((link) => (
-                                        <Link
-                                            key={link.href}
-                                            href={link.href}
-                                            className={styles.mobileLink}
-                                            onClick={() => setIsMenuOpen(false)}
-                                        >
-                                            {link.label}
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
             </div>
+
+            {/* Mobile Menu - Flat Black */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ clipPath: "circle(0% at 100% 0%)" }}
+                        animate={{ clipPath: "circle(150% at 100% 0%)" }}
+                        exit={{ clipPath: "circle(0% at 100% 0%)" }}
+                        transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+                        className="fixed inset-0 bg-[#050505] z-40 flex flex-col items-center justify-center"
+                    >
+                        {navLinks.map((link, i) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                onClick={() => setIsOpen(false)}
+                                className="font-oswald text-6xl md:text-8xl font-bold text-white hover:text-gray-500 transition-colors uppercase my-2 tracking-tighter"
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 }

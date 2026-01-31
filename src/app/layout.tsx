@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/ui/CustomCursor";
+import Navbar from "@/components/Navbar";
+import AIChat from "@/components/ai/AIChat";
 
 const oswald = Oswald({
   weight: ["400", "500", "600", "700"],
@@ -44,7 +47,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${oswald.className} ${oswald.variable} ${inter.variable}`}>{children}</body>
+      <body className={`${oswald.className} ${oswald.variable} ${inter.variable}`}>
+        <CustomCursor />
+        <Navbar />
+        <AIChat />
+        {children}
+      </body>
     </html>
   );
 }

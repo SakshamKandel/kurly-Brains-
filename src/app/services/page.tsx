@@ -1,212 +1,88 @@
 "use client";
+import React from 'react';
+import ParallaxText from '@/components/ui/ParallaxText';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations";
-import styles from "./page.module.css";
-
-const services = [
+const SERVICES = [
     {
-        id: "web-design",
-        icon: "◈",
-        title: "Web Design & Development",
-        description:
-            "We create stunning, responsive websites that don't just look beautiful—they perform. From minimal landing pages to complex web applications, we build digital experiences that convert visitors into customers.",
-        details: [
-            "Custom responsive design tailored to your brand",
-            "Performance-optimized code for fast loading",
-            "SEO-ready structure and semantic markup",
-            "Content management system integration",
-            "E-commerce functionality",
-            "Ongoing maintenance and support",
-        ],
+        category: "DESIGN",
+        items: [
+            { label: "UI / UX Design", desc: "We design beautiful, easy-to-use interfaces." },
+            { label: "Brand Identity", desc: "Logos, colors, and fonts that make your brand stand out." },
+            { label: "Motion Graphics", desc: "Animations that bring your website to life." }
+        ]
     },
     {
-        id: "ai-solutions",
-        icon: "◇",
-        title: "AI Model Training",
-        description:
-            "Harness the power of artificial intelligence with custom-trained models designed for your specific needs. We develop intelligent solutions that automate processes and unlock new possibilities.",
-        details: [
-            "Custom machine learning models",
-            "Natural language processing",
-            "Computer vision solutions",
-            "Predictive analytics",
-            "Automation systems",
-            "AI integration consulting",
-        ],
+        category: "DEVELOPMENT",
+        items: [
+            { label: "Frontend Development", desc: "Fast, responsive websites using the latest technology." },
+            { label: "Backend Systems", desc: "Secure and scalable server-side solutions." },
+            { label: "Content Management", desc: "Easy-to-use tools for updating your content." }
+        ]
     },
     {
-        id: "ui-ux",
-        icon: "○",
-        title: "UI/UX Design",
-        description:
-            "Great design is invisible—it just works. We craft intuitive interfaces and seamless user experiences that delight users and drive engagement through research-driven design decisions.",
-        details: [
-            "User research and personas",
-            "Information architecture",
-            "Wireframing and prototyping",
-            "Visual design systems",
-            "Usability testing",
-            "Interaction design",
-        ],
-    },
-    {
-        id: "amazon-content",
-        icon: "□",
-        title: "Amazon A+ Content",
-        description:
-            "Stand out in the world's largest marketplace with enhanced brand content that tells your story. We create compelling A+ content that increases conversion rates and builds brand loyalty.",
-        details: [
-            "Enhanced Brand Content (EBC)",
-            "Brand Story modules",
-            "Product comparison charts",
-            "Lifestyle imagery",
-            "Mobile-optimized layouts",
-            "A/B testing strategies",
-        ],
-    },
-    {
-        id: "graphic-design",
-        icon: "△",
-        title: "Graphic Design",
-        description:
-            "Visual content that stops the scroll. From social media graphics to comprehensive marketing materials, we create designs that capture attention and communicate your message.",
-        details: [
-            "Social media graphics",
-            "Marketing collateral",
-            "Presentation design",
-            "Digital advertising assets",
-            "Infographics",
-            "Print design",
-        ],
-    },
-    {
-        id: "brand-identity",
-        icon: "◆",
-        title: "Brand Identity",
-        description:
-            "Your brand is more than a logo—it's the complete experience people have with your company. We create cohesive brand systems that resonate with your audience and stand the test of time.",
-        details: [
-            "Logo design and variations",
-            "Color palette development",
-            "Typography selection",
-            "Brand guidelines",
-            "Visual identity system",
-            "Brand strategy",
-        ],
-    },
-    {
-        id: "sports-graphics",
-        icon: "⬡",
-        title: "Sports Graphic Design",
-        description:
-            "Bring the energy of the game to life. We create dynamic, high-impact sports visuals that capture the intensity and passion of athletics—from jersey designs to stadium graphics.",
-        details: [
-            "Jersey and kit design",
-            "Match day posters and graphics",
-            "Team branding and logos",
-            "Athlete portraits and composites",
-            "Stadium and arena signage",
-            "Sports social media content",
-        ],
-    },
+        category: "STRATEGY",
+        items: [
+            { label: "SEO & Growth", desc: "Helping you rank higher and reach more customers." },
+            { label: "Analytics", desc: "Understanding your users to improve performance." }
+        ]
+    }
 ];
 
 export default function ServicesPage() {
+    const [expanded, setExpanded] = useState<string | null>(null);
+
     return (
-        <>
-            <Navbar />
-            <main>
-                {/* Page Header */}
-                <section className={styles.header}>
-                    <div className="container">
-                        <motion.span
-                            className={styles.label}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            What We Do
-                        </motion.span>
-                        <motion.h1
-                            className={styles.title}
-                            initial={{ opacity: 0, y: 60 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                        >
-                            Our Services
-                        </motion.h1>
-                        <motion.p
-                            className={styles.subtitle}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.5 }}
-                        >
-                            End-to-end digital solutions for ambitious brands ready to make an
-                            impact in the digital world.
-                        </motion.p>
-                    </div>
-                </section>
+        <main className="bg-[#050505] min-h-screen text-white pt-32 pb-24 overflow-hidden">
 
-                {/* Services List */}
-                <section className={styles.servicesList}>
-                    <div className="container">
-                        {services.map((service, index) => (
-                            <motion.div
-                                key={service.id}
-                                id={service.id}
-                                className={styles.serviceBlock}
-                                initial={{ opacity: 0, y: 60 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.7, delay: 0.1 }}
-                            >
-                                <div className={styles.serviceHeader}>
-                                    <span className={styles.serviceNumber}>
-                                        0{index + 1}
-                                    </span>
-                                    <span className={styles.serviceIcon}>{service.icon}</span>
-                                </div>
-                                <div className={styles.serviceContent}>
-                                    <h2 className={styles.serviceTitle}>{service.title}</h2>
-                                    <p className={styles.serviceDesc}>{service.description}</p>
-                                    <ul className={styles.serviceDetails}>
-                                        {service.details.map((detail) => (
-                                            <li key={detail}>{detail}</li>
-                                        ))}
-                                    </ul>
-                                    <Link href="/contact" className={styles.serviceLink}>
-                                        Start a Project <span>→</span>
-                                    </Link>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </section>
+            {/* Header Tape */}
+            <div className="mb-24 relative z-10 border-t border-b border-white/10 py-4 bg-[#050505]">
+                <ParallaxText baseVelocity={2} className="text-[8vw] font-oswald font-bold text-transparent text-stroke-white uppercase tracking-tighter opacity-50">
+                    OUR EXPERTISE — WHAT WE DO — SERVICES —
+                </ParallaxText>
+            </div>
 
-                {/* CTA Section */}
-                <section className={styles.cta}>
-                    <div className="container">
-                        <FadeIn>
-                            <h2 className={styles.ctaTitle}>
-                                Ready to Transform Your
-                                <br />
-                                <span className={styles.ctaAccent}>Digital Presence?</span>
+            <div className="container mx-auto px-6 max-w-[1400px]">
+                {SERVICES.map((section) => (
+                    <div key={section.category} className="mb-24 grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-white/20 pt-8">
+
+                        {/* Category Name */}
+                        <div className="md:col-span-4">
+                            <h2 className="text-xl font-mono text-gray-500 tracking-widest uppercase">
+                                {section.category}
                             </h2>
-                            <p className={styles.ctaText}>
-                                Let&apos;s discuss how we can help bring your vision to life.
-                            </p>
-                            <Link href="/contact" className="btn-primary">
-                                Get in Touch
-                            </Link>
-                        </FadeIn>
+                        </div>
+
+                        {/* Services List */}
+                        <div className="md:col-span-8 flex flex-col">
+                            {section.items.map((item) => (
+                                <div
+                                    key={item.label}
+                                    className="group py-8 border-b border-white/10 cursor-pointer"
+                                    onMouseEnter={() => setExpanded(item.label)}
+                                // onMouseLeave={() => setExpanded(null)} // Keep expanded for easier reading? Or auto-collapse. Let's keep hover for clean look.
+                                >
+                                    <h3 className="text-3xl md:text-5xl font-oswald font-bold text-white group-hover:text-gray-300 transition-colors">
+                                        {item.label}
+                                    </h3>
+                                    <p className="mt-4 text-gray-400 font-mono text-sm md:text-base max-w-xl">
+                                        {item.desc}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </section>
-            </main>
-            <Footer />
-        </>
+                ))}
+            </div>
+
+            {/* Footer Tape */}
+            <div className="mt-24 relative z-10 opacity-30">
+                <ParallaxText baseVelocity={-2} className="text-[4vw] font-mono text-white uppercase tracking-widest">
+                    READY TO START? — CONTACT US —
+                </ParallaxText>
+            </div>
+
+        </main>
     );
 }

@@ -1,0 +1,42 @@
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050505;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.text {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 10vw, 8rem);
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+}
+
+.loaderLine {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #fff;
+    width: 100%;
+    animation: load 2s linear forwards;
+}
+
+@keyframes load {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}

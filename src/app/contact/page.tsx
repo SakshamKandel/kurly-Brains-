@@ -1,164 +1,158 @@
 "use client";
-
-import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { FadeIn, FloatingElement } from "@/components/animations";
-import styles from "./page.module.css";
+import React, { useState } from 'react';
+import ParallaxText from '@/components/ui/ParallaxText';
+import { motion } from 'framer-motion';
 
 export default function ContactPage() {
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus('loading');
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                setStatus('success');
+                setFormData({ name: '', email: '', message: '' });
+            } else {
+                setStatus('error');
+            }
+        } catch (error) {
+            setStatus('error');
+        }
+    };
     return (
-        <>
-            <Navbar />
-            <main>
-                {/* Page Header */}
-                <section className={styles.header}>
-                    <div className={styles.bgElements}>
-                        <FloatingElement duration={8} distance={20}>
-                            <div className={styles.floatingOrb} />
-                        </FloatingElement>
+        <main className="bg-[#050505] min-h-screen text-white pt-32 pb-24 overflow-hidden flex flex-col justify-between">
+
+            {/* Header Tape */}
+            <div className="mb-12 relative z-10 opacity-50">
+                <ParallaxText baseVelocity={1} className="text-[6vw] font-oswald font-light text-transparent text-stroke-white uppercase tracking-widest">
+                    START COLLABORATION — OPEN COMMUNICATION —
+                </ParallaxText>
+            </div>
+
+            <div className="container mx-auto px-6 max-w-[1200px] flex-grow flex flex-col justify-center">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+
+                    {/* Left: Heading */}
+                    <div className="flex flex-col justify-center">
+                        <h1 className="text-[10vw] leading-[0.8] font-oswald font-bold uppercase mb-8">
+                            LET'S <br />
+                            <span className="text-transparent text-stroke-white">TALK.</span>
+                        </h1>
+                        <p className="font-mono text-sm text-gray-500 uppercase tracking-widest max-w-md">
+                            &gt; Start a project <br />
+                            &gt; Request Audit <br />
+                            &gt; General Inquiry
+                        </p>
                     </div>
 
-                    <div className="container">
-                        <motion.span
-                            className={styles.label}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            Get In Touch
-                        </motion.span>
-                        <motion.h1
-                            className={styles.title}
-                            initial={{ opacity: 0, y: 60 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                        >
-                            Let&apos;s Talk
-                        </motion.h1>
-                        <motion.p
-                            className={styles.subtitle}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.5 }}
-                        >
-                            Ready to start your project? We&apos;d love to hear from you.
-                            Reach out and let&apos;s create something amazing together.
-                        </motion.p>
-                    </div>
-                </section>
-
-                {/* Contact Content */}
-                <section className={styles.contactSection}>
-                    <div className="container">
-                        <div className={styles.contactGrid}>
-                            {/* Contact Form */}
-                            <FadeIn>
-                                <div className={styles.formWrapper}>
-                                    <h2 className={styles.formTitle}>Send a Message</h2>
-                                    <form className={styles.form}>
-                                        <div className={styles.formRow}>
-                                            <div className={styles.formGroup}>
-                                                <label htmlFor="name" className={styles.formLabel}>
-                                                    Name
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    id="name"
-                                                    className={styles.formInput}
-                                                    placeholder="Your name"
-                                                />
-                                            </div>
-                                            <div className={styles.formGroup}>
-                                                <label htmlFor="email" className={styles.formLabel}>
-                                                    Email
-                                                </label>
-                                                <input
-                                                    type="email"
-                                                    id="email"
-                                                    className={styles.formInput}
-                                                    placeholder="your@email.com"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className={styles.formGroup}>
-                                            <label htmlFor="service" className={styles.formLabel}>
-                                                Service Interested In
-                                            </label>
-                                            <select id="service" className={styles.formSelect}>
-                                                <option value="">Select a service</option>
-                                                <option value="web-design">Web Design & Development</option>
-                                                <option value="ai">AI Model Training</option>
-                                                <option value="ui-ux">UI/UX Design</option>
-                                                <option value="amazon">Amazon A+ Content</option>
-                                                <option value="graphic">Graphic Design</option>
-                                                <option value="brand">Brand Identity</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                        </div>
-                                        <div className={styles.formGroup}>
-                                            <label htmlFor="message" className={styles.formLabel}>
-                                                Message
-                                            </label>
-                                            <textarea
-                                                id="message"
-                                                className={styles.formTextarea}
-                                                placeholder="Tell us about your project..."
-                                                rows={6}
-                                            />
-                                        </div>
-                                        <button type="submit" className={styles.formButton}>
-                                            Send Message
-                                            <span>→</span>
-                                        </button>
-                                    </form>
+                    {/* Right: Terminal Form */}
+                    <div className="flex flex-col gap-0 border border-white/20">
+                        {status === 'success' ? (
+                            <div className="p-12 flex flex-col items-center justify-center text-center h-full min-h-[400px]">
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6"
+                                >
+                                    <svg className="w-8 h-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </motion.div>
+                                <h3 className="text-2xl font-oswald font-bold uppercase mb-2">Message Sent</h3>
+                                <p className="font-mono text-sm text-gray-500">We will initiate contact shortly.</p>
+                                <button
+                                    onClick={() => setStatus('idle')}
+                                    className="mt-8 text-sm font-mono text-white/50 hover:text-white uppercase underline"
+                                >
+                                    Send another transmission
+                                </button>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit}>
+                                {/* Name */}
+                                <div className="group border-b border-white/20 p-6 hover:bg-white/5 transition-colors focus-within:bg-white/10">
+                                    <label className="block font-mono text-xs text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-white">
+                                        // FULL NAME
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        required
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        placeholder="ENTER NAME"
+                                        className="w-full bg-transparent border-none outline-none font-oswald text-2xl uppercase placeholder-white/20 text-white"
+                                    />
                                 </div>
-                            </FadeIn>
 
-                            {/* Contact Info */}
-                            <FadeIn delay={0.2}>
-                                <div className={styles.infoWrapper}>
-                                    <div className={styles.infoBlock}>
-                                        <h3 className={styles.infoTitle}>Email</h3>
-                                        <a href="mailto:hello@kurlybrains.com" className={styles.infoLink}>
-                                            hello@kurlybrains.com
-                                        </a>
-                                    </div>
-
-                                    <div className={styles.infoBlock}>
-                                        <h3 className={styles.infoTitle}>Location</h3>
-                                        <p className={styles.infoText}>
-                                            Global • Remote First
-                                            <br />
-                                            Serving clients worldwide
-                                        </p>
-                                    </div>
-
-                                    <div className={styles.infoBlock}>
-                                        <h3 className={styles.infoTitle}>Availability</h3>
-                                        <p className={styles.infoText}>
-                                            Currently accepting new projects
-                                            <br />
-                                            Response within 24 hours
-                                        </p>
-                                    </div>
-
-                                    <div className={styles.infoBlock}>
-                                        <h3 className={styles.infoTitle}>Connect</h3>
-                                        <div className={styles.socialLinks}>
-                                            <a href="#" className={styles.socialLink}>Instagram</a>
-                                            <a href="#" className={styles.socialLink}>LinkedIn</a>
-                                            <a href="#" className={styles.socialLink}>Behance</a>
-                                            <a href="#" className={styles.socialLink}>Dribbble</a>
-                                        </div>
-                                    </div>
+                                {/* Email */}
+                                <div className="group border-b border-white/20 p-6 hover:bg-white/5 transition-colors focus-within:bg-white/10">
+                                    <label className="block font-mono text-xs text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-white">
+                                        // EMAIL ADDRESS
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        required
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder="ENTER EMAIL"
+                                        className="w-full bg-transparent border-none outline-none font-oswald text-2xl uppercase placeholder-white/20 text-white"
+                                    />
                                 </div>
-                            </FadeIn>
-                        </div>
+
+                                {/* Message */}
+                                <div className="group p-6 hover:bg-white/5 transition-colors focus-within:bg-white/10">
+                                    <label className="block font-mono text-xs text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-white">
+                                        // PROJECT DETAILS
+                                    </label>
+                                    <textarea
+                                        name="message"
+                                        required
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        placeholder="ENTER MESSAGE..."
+                                        rows={4}
+                                        className="w-full bg-transparent border-none outline-none font-oswald text-2xl uppercase placeholder-white/20 text-white resize-none"
+                                    />
+                                </div>
+
+                                {/* Error Message */}
+                                {status === 'error' && (
+                                    <div className="px-6 py-2 bg-red-500/10 border-l-2 border-red-500">
+                                        <p className="font-mono text-xs text-red-400">TRANSMISSION FAILED. PLEASE RETRY.</p>
+                                    </div>
+                                )}
+
+                                {/* Submit */}
+                                <button
+                                    type="submit"
+                                    disabled={status === 'loading'}
+                                    className="w-full bg-white text-black font-oswald font-bold text-xl uppercase py-6 hover:bg-blue-600 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {status === 'loading' ? 'TRANSMITTING...' : 'SEND MESSAGE'}
+                                </button>
+                            </form>
+                        )}
                     </div>
-                </section>
-            </main>
-            <Footer />
-        </>
+
+                </div>
+            </div>
+
+        </main>
     );
 }

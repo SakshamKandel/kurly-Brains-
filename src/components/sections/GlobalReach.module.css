@@ -1,72 +1,95 @@
 .section {
-    padding: var(--section-padding);
-    background-color: var(--bg-primary);
-    /* Removed border-top */
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.layout {
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 column grid */
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cell {
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 4rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    justify-content: space-between;
+    height: 300px;
+    position: relative;
+    transition: background-color 0.2s ease;
 }
 
-.headingBlock {
-    max-width: 800px;
+.cell:hover {
+    background-color: #111;
+}
+
+.header {
+    justify-content: flex-end;
+}
+
+.header h2 {
+    font-size: 1.5rem;
+    transform: rotate(-90deg);
+    transform-origin: bottom left;
+    position: absolute;
+    bottom: 2rem;
+    left: 3rem;
+    white-space: nowrap;
 }
 
 .label {
     font-family: var(--font-body);
     font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--accent-primary);
-    display: block;
-    margin-bottom: 2rem;
-}
-
-.headline {
-    font-family: var(--font-heading);
-    font-size: var(--text-h2);
-    color: var(--text-primary);
-    line-height: 1.1;
-    text-transform: uppercase;
-}
-
-.accent {
-    color: var(--accent-primary);
-}
-
-.statsRow {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 2rem;
-}
-
-.stat {
-    display: flex;
-    flex-direction: column;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
 }
 
 .value {
     font-family: var(--font-heading);
-    font-size: clamp(3.5rem, 8vw, 6rem);
-    line-height: 0.9;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
+    font-size: 5rem;
+    line-height: 1;
 }
 
-.key {
-    margin-top: 1.5rem;
+.footer {
+    grid-column: span 4;
+    height: auto;
+    padding: 1rem 2rem;
+    flex-direction: row;
+    justify-content: space-between;
     font-family: var(--font-body);
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
+    font-size: 0.75rem;
     color: var(--text-muted);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header {
+        grid-column: span 2;
+        height: 150px;
+    }
+
+    .header h2 {
+        transform: none;
+        position: static;
+    }
 }
 
 @media (max-width: 768px) {
-    .statsRow {
-        flex-direction: column;
-        gap: 4rem;
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        grid-column: 1;
+    }
+
+    .footer {
+        grid-column: 1;
     }
 }

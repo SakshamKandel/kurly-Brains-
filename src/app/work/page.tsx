@@ -1,146 +1,60 @@
 "use client";
+import React from 'react';
+import ParallaxText from '@/components/ui/ParallaxText';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { FadeIn } from "@/components/animations";
-import styles from "./page.module.css";
-
-const projects = [
-    {
-        id: 1,
-        title: "Brand Redesign",
-        client: "TechStart Inc.",
-        category: "Brand Identity",
-        year: "2024",
-    },
-    {
-        id: 2,
-        title: "E-Commerce Platform",
-        client: "Fashion Forward",
-        category: "Web Design",
-        year: "2024",
-    },
-    {
-        id: 3,
-        title: "Mobile App UI",
-        client: "FinTech Pro",
-        category: "UI/UX Design",
-        year: "2024",
-    },
-    {
-        id: 4,
-        title: "AI Chatbot",
-        client: "Support Hub",
-        category: "AI Solutions",
-        year: "2023",
-    },
-    {
-        id: 5,
-        title: "Amazon Storefront",
-        client: "Wellness Co.",
-        category: "Amazon A+",
-        year: "2023",
-    },
-    {
-        id: 6,
-        title: "Marketing Campaign",
-        client: "Growth Labs",
-        category: "Graphic Design",
-        year: "2023",
-    },
+const PROJECTS = [
+    { title: "Kurly Branding", category: "Brand Identity", year: "2025" },
+    { title: "Kurly Web", category: "Web Interface", year: "2026" },
+    { title: "Kurly AI", category: "AI Model Creation", year: "2025" },
+    { title: "Kurly Sports", category: "Graphic Design", year: "2025" },
+    { title: "Kurly Social", category: "Content Strategy", year: "2026" },
 ];
 
 export default function WorkPage() {
     return (
-        <>
-            <Navbar />
-            <main>
-                {/* Page Header */}
-                <section className={styles.header}>
-                    <div className="container">
-                        <motion.span
-                            className={styles.label}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            Portfolio
-                        </motion.span>
-                        <motion.h1
-                            className={styles.title}
-                            initial={{ opacity: 0, y: 60 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                        >
-                            Our Work
-                        </motion.h1>
-                        <motion.p
-                            className={styles.subtitle}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.5 }}
-                        >
-                            A selection of projects we&apos;re proud of. Each one represents a
-                            unique challenge and creative solution.
-                        </motion.p>
-                    </div>
-                </section>
+        <main className="bg-[#050505] min-h-screen text-white pt-32 pb-24 overflow-hidden">
 
-                {/* Projects Grid */}
-                <section className={styles.projects}>
-                    <div className="container">
-                        <div className={styles.projectsGrid}>
-                            {projects.map((project, index) => (
-                                <motion.div
-                                    key={project.id}
-                                    className={styles.projectCard}
-                                    initial={{ opacity: 0, y: 50 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    whileHover={{ y: -10 }}
-                                >
-                                    <div className={styles.projectImage}>
-                                        <span className={styles.projectPlaceholder}>
-                                            {project.title}
-                                        </span>
-                                    </div>
-                                    <div className={styles.projectInfo}>
-                                        <div className={styles.projectMeta}>
-                                            <span className={styles.projectCategory}>
-                                                {project.category}
-                                            </span>
-                                            <span className={styles.projectYear}>{project.year}</span>
-                                        </div>
-                                        <h3 className={styles.projectTitle}>{project.title}</h3>
-                                        <p className={styles.projectClient}>{project.client}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+            {/* Header Tape */}
+            <div className="mb-24 relative z-10 border-t border-b border-white/10 py-4 bg-[#050505]">
+                <ParallaxText baseVelocity={2} className="text-[8vw] font-oswald font-bold text-transparent text-stroke-white uppercase tracking-tighter opacity-50">
+                    OUR WORK — RECENT PROJECTS — PORTFOLIO —
+                </ParallaxText>
+            </div>
 
-                {/* CTA */}
-                <section className={styles.cta}>
-                    <div className="container">
-                        <FadeIn>
-                            <h2 className={styles.ctaTitle}>
-                                Like What You See?
+            {/* Project List */}
+            <div className="container mx-auto px-6 max-w-[1800px]">
+                {PROJECTS.map((project, index) => (
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="group relative border-t border-white/20 py-12 md:py-16 hover:bg-white hover:text-black transition-colors duration-500 cursor-pointer overflow-hidden"
+                    >
+                        <div className="relative z-10 flex flex-col md:flex-row md:items-baseline md:justify-between gap-4">
+                            <h2 className="text-[5vw] md:text-[6vw] font-oswald font-bold uppercase leading-none tracking-tighter">
+                                {project.title}
                             </h2>
-                            <p className={styles.ctaText}>
-                                Let&apos;s create something amazing together.
-                            </p>
-                            <Link href="/contact" className="btn-primary">
-                                Start a Project
-                            </Link>
-                        </FadeIn>
-                    </div>
-                </section>
-            </main>
-            <Footer />
-        </>
+                            <div className="flex items-center gap-8 font-mono text-sm md:text-base uppercase tracking-widest opacity-60 group-hover:opacity-100">
+                                <span>{project.category}</span>
+                                <span>[{project.year}]</span>
+                            </div>
+                        </div>
+
+
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Footer Tape */}
+            <div className="mt-24 relative z-10 opacity-30">
+                <ParallaxText baseVelocity={-2} className="text-[4vw] font-mono text-white uppercase tracking-widest">
+                    END OF LIST — SCROLL UP —
+                </ParallaxText>
+            </div>
+
+        </main>
     );
 }

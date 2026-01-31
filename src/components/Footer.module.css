@@ -1,6 +1,7 @@
 .footer {
-    padding: 4rem 0 2rem;
+    padding: 4rem 0;
     background-color: var(--bg-primary);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .content {
@@ -18,45 +19,69 @@
 .logoLink {
     display: flex;
     align-items: center;
+    transition: opacity 0.4s var(--ease-smooth);
+}
+
+.logoLink:hover {
+    opacity: 0.8;
 }
 
 .logoImage {
-    height: 32px;
-    width: auto;
-    max-width: 180px;
+    width: 160px;
+    height: auto;
     object-fit: contain;
 }
 
 .socials {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
-.socials a {
-    font-size: 0.85rem;
+.socialLink {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--text-secondary);
-    transition: color 0.3s ease;
+    color: var(--text-muted);
+    position: relative;
+    transition: color 0.4s var(--ease-smooth);
 }
 
-.socials a:hover {
-    color: var(--accent-primary);
+.socialLink::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-primary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+.socialLink:hover {
+    color: var(--text-primary);
+}
+
+.socialLink:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #1a1a1a;
     padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.copyright,
-.legal a {
-    font-size: 0.75rem;
+.copyright {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
     color: var(--text-muted);
-    opacity: 0.7;
+    letter-spacing: 0.05em;
 }
 
 .legal {
@@ -64,9 +89,36 @@
     gap: 2rem;
 }
 
-@media (max-width: 600px) {
+.legalLink {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    transition: color 0.3s var(--ease-smooth);
+}
+
+.legalLink:hover {
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
     .main {
         flex-direction: column;
         gap: 2rem;
+    }
+
+    .socials {
+        gap: 1.5rem;
+    }
+
+    .bottom {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .legal {
+        gap: 1.5rem;
     }
 }
