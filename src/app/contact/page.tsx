@@ -48,7 +48,7 @@ export default function ContactPage() {
 
                     {/* Left: Heading */}
                     <div className="flex flex-col justify-center">
-                        <h1 className="text-[10vw] leading-[0.8] font-oswald font-bold uppercase mb-8">
+                        <h1 className="text-[15vw] md:text-[10vw] leading-[0.8] font-oswald font-bold uppercase mb-6 md:mb-8">
                             LET'S <br />
                             <span className="text-transparent text-stroke-white">TALK.</span>
                         </h1>
@@ -95,7 +95,7 @@ export default function ContactPage() {
                                         value={formData.name}
                                         onChange={handleChange}
                                         placeholder="ENTER NAME"
-                                        className="w-full bg-transparent border-none outline-none font-oswald text-2xl uppercase placeholder-white/20 text-white"
+                                        className="w-full bg-transparent border-none outline-none font-oswald text-xl md:text-2xl uppercase placeholder-white/20 text-white"
                                     />
                                 </div>
 
@@ -111,7 +111,7 @@ export default function ContactPage() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         placeholder="ENTER EMAIL"
-                                        className="w-full bg-transparent border-none outline-none font-oswald text-2xl uppercase placeholder-white/20 text-white"
+                                        className="w-full bg-transparent border-none outline-none font-oswald text-xl md:text-2xl uppercase placeholder-white/20 text-white"
                                     />
                                 </div>
 
@@ -127,7 +127,7 @@ export default function ContactPage() {
                                         onChange={handleChange}
                                         placeholder="ENTER MESSAGE..."
                                         rows={4}
-                                        className="w-full bg-transparent border-none outline-none font-oswald text-2xl uppercase placeholder-white/20 text-white resize-none"
+                                        className="w-full bg-transparent border-none outline-none font-oswald text-xl md:text-2xl uppercase placeholder-white/20 text-white resize-none"
                                     />
                                 </div>
 

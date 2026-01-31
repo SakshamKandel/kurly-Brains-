@@ -82,12 +82,12 @@ export default function AIChat() {
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-[100] font-sans">
+        <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[100] font-sans">
             <AnimatePresence mode="wait">
                 {isOpen ? (
                     <motion.div
                         layoutId="chat-container"
-                        className="w-[calc(100vw-2rem)] md:w-[420px] h-[600px] bg-zinc-900 flex flex-col overflow-hidden relative shadow-2xl"
+                        className="fixed inset-0 md:relative md:inset-auto w-full md:w-[420px] h-full md:h-[600px] bg-zinc-900 flex flex-col overflow-hidden shadow-2xl"
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9 }}
@@ -141,7 +141,7 @@ export default function AIChat() {
                                 {/* Tape 1: Background Outline */}
                                 <div className="absolute top-4 left-[-10%] w-[120%] rotate-3 z-10 opacity-60">
                                     <motion.div
-                                        className="whitespace-nowrap flex gap-4 text-[12px] font-oswald font-light text-transparent text-stroke-white uppercase tracking-widest"
+                                        className="whitespace-nowrap flex gap-4 text-[10px] md:text-[12px] font-oswald font-light text-transparent text-stroke-white uppercase tracking-widest"
                                         animate={{ x: [0, -500] }}
                                         transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
                                     >
@@ -153,7 +153,7 @@ export default function AIChat() {
                                 {/* Tape 2: Foreground Solid */}
                                 <div className="absolute top-6 left-[-10%] w-[120%] -rotate-2 bg-white z-20 py-2">
                                     <motion.div
-                                        className="whitespace-nowrap flex gap-6 text-[14px] font-oswald font-bold text-black uppercase tracking-widest leading-none"
+                                        className="whitespace-nowrap flex gap-6 text-[12px] md:text-[14px] font-oswald font-bold text-black uppercase tracking-widest leading-none"
                                         animate={{ x: [0, -500] }}
                                         transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
                                     >
@@ -173,7 +173,7 @@ export default function AIChat() {
                         </div>
 
                         {/* TRANSCRIPT VIEW */}
-                        <div className="flex-1 px-6 py-4 overflow-y-auto space-y-8 font-mono text-sm relative custom-scrollbar z-10">
+                        <div className="flex-1 px-4 md:px-6 py-4 overflow-y-auto space-y-6 md:space-y-8 font-mono text-sm relative custom-scrollbar z-10">
                             {messages.map((msg, idx) => (
                                 <motion.div
                                     key={idx}
@@ -228,7 +228,7 @@ export default function AIChat() {
                         )}
 
                         {/* MINIMALIST INPUT */}
-                        <div className="px-6 pb-6 pt-2 bg-zinc-900 z-20">
+                        <div className="px-4 md:px-6 pb-6 pt-2 bg-zinc-900 z-20 safe-area-pb">
                             <div className="flex items-end gap-3 border-b border-white/20 pb-2 focus-within:border-white transition-colors duration-300">
                                 <textarea
                                     value={inputValue}
@@ -256,13 +256,13 @@ export default function AIChat() {
                     /* LAUNCH BUTTON (Morph Source) */
                     <motion.button
                         layoutId="chat-container"
-                        className="w-16 h-16 bg-zinc-900 flex items-center justify-center group relative cursor-pointer"
+                        className="w-14 h-14 md:w-16 md:h-16 bg-zinc-900 flex items-center justify-center group relative cursor-pointer rounded-xl shadow-lg"
                         onClick={() => setIsOpen(true)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
                         <motion.div
-                            className="w-10 h-10 relative opacity-100 transition-opacity"
+                            className="w-8 h-8 md:w-10 md:h-10 relative opacity-100 transition-opacity"
                             layoutId="chat-logo"
                         >
                             <img

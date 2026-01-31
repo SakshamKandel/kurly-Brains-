@@ -21,7 +21,7 @@ export default function AboutPage() {
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        className="text-[4rem] md:text-[6rem] leading-[0.9] font-oswald font-bold uppercase mb-12"
+                        className="text-[2.5rem] md:text-[6rem] leading-[0.9] font-oswald font-bold uppercase mb-8 md:mb-12"
                     >
                         WE BUILD <br />
                         <span className="text-transparent text-stroke-white">SYNTHETIC</span> <br />
@@ -43,7 +43,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Data Logs (Stats/Team) */}
-                <div className="md:col-span-4 border-l border-white/10 pl-8 flex flex-col gap-12 font-mono text-xs uppercase tracking-widest text-gray-500">
+                <div className="md:col-span-4 md:border-l border-white/10 md:pl-8 pt-8 md:pt-0 flex flex-col gap-8 md:gap-12 font-mono text-xs uppercase tracking-widest text-gray-500">
 
                     <div className="flex flex-col gap-2">
                         <span>OPERATING STATUS</span>

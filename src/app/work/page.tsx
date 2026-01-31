@@ -34,7 +34,7 @@ export default function WorkPage() {
                         className="group relative border-t border-white/20 py-12 md:py-16 hover:bg-white hover:text-black transition-colors duration-500 cursor-pointer overflow-hidden"
                     >
                         <div className="relative z-10 flex flex-col md:flex-row md:items-baseline md:justify-between gap-4">
-                            <h2 className="text-[5vw] md:text-[6vw] font-oswald font-bold uppercase leading-none tracking-tighter">
+                            <h2 className="text-[8vw] md:text-[6vw] font-oswald font-bold uppercase leading-none tracking-tighter">
                                 {project.title}
                             </h2>
                             <div className="flex items-center gap-8 font-mono text-sm md:text-base uppercase tracking-widest opacity-60 group-hover:opacity-100">

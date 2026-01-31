@@ -45,7 +45,7 @@ export default function ServicesPage() {
 
             <div className="container mx-auto px-6 max-w-[1400px]">
                 {SERVICES.map((section) => (
-                    <div key={section.category} className="mb-24 grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-white/20 pt-8">
+                    <div key={section.category} className="mb-16 md:mb-24 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 border-t border-white/20 pt-6 md:pt-8">
 
                         {/* Category Name */}
                         <div className="md:col-span-4">
@@ -63,7 +63,7 @@ export default function ServicesPage() {
                                     onMouseEnter={() => setExpanded(item.label)}
                                 // onMouseLeave={() => setExpanded(null)} // Keep expanded for easier reading? Or auto-collapse. Let's keep hover for clean look.
                                 >
-                                    <h3 className="text-3xl md:text-5xl font-oswald font-bold text-white group-hover:text-gray-300 transition-colors">
+                                    <h3 className="text-2xl md:text-5xl font-oswald font-bold text-white group-hover:text-gray-300 transition-colors">
                                         {item.label}
                                     </h3>
                                     <p className="mt-4 text-gray-400 font-mono text-sm md:text-base max-w-xl">
