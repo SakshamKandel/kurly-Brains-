@@ -50,13 +50,13 @@ export async function POST(req: Request) {
             'http://localhost:3000',
             'https://kurlybrains.com',
             'https://www.kurlybrains.com',
-            'https://kurly-brains.vercel.app',
+            '.vercel.app', // All Vercel deployments
             process.env.NEXT_PUBLIC_SITE_URL,
         ].filter(Boolean);
 
         const isValidOrigin = allowedOrigins.some(allowed =>
             origin?.includes(allowed as string) || referer?.includes(allowed as string)
-        );
+        ) || origin?.endsWith('.vercel.app') || referer?.includes('.vercel.app');
 
         // In production, enforce origin check (skip in dev)
         if (process.env.NODE_ENV === 'production' && !isValidOrigin) {
