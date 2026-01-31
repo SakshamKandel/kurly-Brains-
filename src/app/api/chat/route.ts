@@ -7,8 +7,8 @@ const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT = 20; // Max requests per window
 const RATE_WINDOW = 60 * 1000; // 1 minute window
 
-function getRateLimitKey(req: Request): string {
-    const headersList = headers();
+async function getRateLimitKey(): Promise<string> {
+    const headersList = await headers();
     const forwarded = headersList.get('x-forwarded-for');
     const ip = forwarded ? forwarded.split(',')[0] : 'unknown';
     return ip;
@@ -34,7 +34,7 @@ function isRateLimited(key: string): boolean {
 export async function POST(req: Request) {
     try {
         // Rate limiting check
-        const clientKey = getRateLimitKey(req);
+        const clientKey = await getRateLimitKey();
         if (isRateLimited(clientKey)) {
             return NextResponse.json(
                 { error: 'Too many requests. Please wait a moment.' },
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
         }
 
         // Origin validation (only allow requests from your domain)
-        const headersList = headers();
+        const headersList = await headers();
         const origin = headersList.get('origin');
         const referer = headersList.get('referer');
         const allowedOrigins = [
