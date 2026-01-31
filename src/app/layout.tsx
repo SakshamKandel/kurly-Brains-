@@ -32,6 +32,11 @@ export const metadata: Metadata = {
     "Digital Agency",
   ],
   authors: [{ name: "Kurly Brains" }],
+  icons: {
+    icon: "/logos/White Logo Without Text.png",
+    shortcut: "/logos/White Logo Without Text.png",
+    apple: "/logos/White Logo Without Text.png",
+  },
   openGraph: {
     title: "Kurly Brains | Creative Digital Agency",
     description:

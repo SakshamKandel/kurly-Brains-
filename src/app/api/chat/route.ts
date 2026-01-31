@@ -1,8 +1,71 @@
 import { NextResponse } from 'next/server';
 import { sendConsultationEmail } from '@/lib/email';
+import { headers } from 'next/headers';
+
+// Simple in-memory rate limiter (resets on server restart)
+const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
+const RATE_LIMIT = 20; // Max requests per window
+const RATE_WINDOW = 60 * 1000; // 1 minute window
+
+function getRateLimitKey(req: Request): string {
+    const headersList = headers();
+    const forwarded = headersList.get('x-forwarded-for');
+    const ip = forwarded ? forwarded.split(',')[0] : 'unknown';
+    return ip;
+}
+
+function isRateLimited(key: string): boolean {
+    const now = Date.now();
+    const record = rateLimitMap.get(key);
+
+    if (!record || now - record.timestamp > RATE_WINDOW) {
+        rateLimitMap.set(key, { count: 1, timestamp: now });
+        return false;
+    }
+
+    if (record.count >= RATE_LIMIT) {
+        return true;
+    }
+
+    record.count++;
+    return false;
+}
 
 export async function POST(req: Request) {
     try {
+        // Rate limiting check
+        const clientKey = getRateLimitKey(req);
+        if (isRateLimited(clientKey)) {
+            return NextResponse.json(
+                { error: 'Too many requests. Please wait a moment.' },
+                { status: 429 }
+            );
+        }
+
+        // Origin validation (only allow requests from your domain)
+        const headersList = headers();
+        const origin = headersList.get('origin');
+        const referer = headersList.get('referer');
+        const allowedOrigins = [
+            'http://localhost:3000',
+            'https://kurlybrains.com',
+            'https://www.kurlybrains.com',
+            'https://kurly-brains.vercel.app',
+            process.env.NEXT_PUBLIC_SITE_URL,
+        ].filter(Boolean);
+
+        const isValidOrigin = allowedOrigins.some(allowed =>
+            origin?.includes(allowed as string) || referer?.includes(allowed as string)
+        );
+
+        // In production, enforce origin check (skip in dev)
+        if (process.env.NODE_ENV === 'production' && !isValidOrigin) {
+            return NextResponse.json(
+                { error: 'Unauthorized request origin' },
+                { status: 403 }
+            );
+        }
+
         const { messages } = await req.json();
 
         // Add default system prompt if not present
